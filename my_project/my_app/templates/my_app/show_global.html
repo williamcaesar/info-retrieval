@@ -1,0 +1,43 @@
+{% for var in info %}
+    <div id="div-tables">
+        <div id="div-global-table" style="margin: 10px; ">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Qt. Words</th>
+                        <th scope="col">Qt. Stopwords</th>
+                        <th scope="col">Qt. Adverbios</th>
+                        <th scope="col">Qt. Tokens</th>
+                        <th scope="col">Qt. Document</th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <td scope="row"> </td>
+                        <!-- <td> {{ var.qtWords }} - {{ var.qtWordsP }}% </td> -->
+                        <td> {{ var.qtWords }} </td>
+                        <td> {{ var.qtStopwords }} - {{ var.qtStopwordsP }}% </td>
+                        <td> {{ var.qtAdverbios }} - {{ var.qtAdverbiosP }}% </td>
+                        <td> {{ var.qtTokens }} - {{ var.qtTokensP }}% </td>
+                        <td> {{ var.qtDocument }} </td>
+                    </tr>
+                </thead>
+                {% for doc in var.documents %}
+                    <thead>
+                        <tr>
+                            <td scope="row"> {{ doc.name }} </td>
+                            <!-- <td> {{ var.qtWords }} - {{ var.qtWordsP }}% </td> -->
+                            <td> {{ doc.qtWords }} </td>
+                            <td> {{ doc.qtStopwords }} - {{ doc.qtStopwordsP }}% </td>
+                            <td> {{ doc.qtAdverbios }} - {{ doc.qtAdverbiosP }}% </td>
+                            <td> {{ doc.qtTokens }} - {{ doc.qtTokensP }}% </td>
+                            <td> - </td>
+                        </tr>
+                    </thead>
+                {% endfor %}
+            </table>
+        </div>
+        
+    </div>
+{% endfor %}

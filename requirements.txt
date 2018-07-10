@@ -1,0 +1,7 @@
+bs4
+pdftotext
+mysqlclient
+pytesseract
+ply
+django
+python-docx
