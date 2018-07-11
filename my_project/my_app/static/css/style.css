@@ -21,7 +21,7 @@ nav ul>li {
 }
 
 td {
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 3px solid #FF6A00;
 }
 
 .row-document {
@@ -35,10 +35,10 @@ td {
 
 /* Painel deslizante, search, lista de documentos encontrados */
 .panel, .flip {
-    padding: 5px;
+    padding: 7px;
     text-align: center;
-    background-color: #f8f8f8;
-    border: solid 1px #c3c3c3;
+    background-color: #f8c3f8;
+    border: solid 3px #c300c3;
 }
 
 .panel {

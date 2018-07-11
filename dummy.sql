@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `ri_vetorial`.`documents` (
+CREATE TABLE IF NOT EXISTS `ri_probabilistic`.`documents` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `text` MEDIUMTEXT NULL DEFAULT NULL,
@@ -18,7 +18,7 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 164
 DEFAULT CHARACTER SET = utf8
 
-CREATE TABLE IF NOT EXISTS `ri_vetorial`.`global` (
+CREATE TABLE IF NOT EXISTS `ri_probabilistic`.`global` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `words` JSON NULL DEFAULT NULL,
   `qtStopwords` INT(11) NULL DEFAULT '0',

@@ -1,19 +1,19 @@
-# ri-vetorial
+# Information Retrieval - Probabilistic Model
 
-# OS dependencies
+OS dependencies
+```
+tesseract
+```
+Setup for pdftotext (https://github.com/jalan/pdftotext)
 
-    tesseract
-
-# OS dependencies for pdftotext (https://github.com/jalan/pdftotext)
-
-Debian, Ubuntu, and friends:
+Debian derivates:
 
 ```
 sudo apt-get update
 sudo apt-get install build-essential libpoppler-cpp-dev pkg-config python-dev
 ```
 
-Fedora, Red Hat, and friends:
+Red hat derivates:
 
 ```
 sudo yum install gcc-c++ pkgconfig poppler-cpp-devel python-devel redhat-rpm-config
@@ -25,21 +25,19 @@ macOS:
 brew install pkg-config poppler
 ```
 
-# Install python dependences
+Python dependencies
 ```
-pip3 install -r requirements.txt
+pipenv install
 ```
-
-
-# Configure mysql user
+Configure mysql user
 
 ```
 create database ri_vetorial;
-create user 'ri_vetorial'@'localhost' identified by '14411441';
-grant all privileges on ri_vetorial.* to 'ri_vetorial'@'localhost';
+create user 'admin'@'localhost' identified by 'password';
+grant all privileges on ri_probabilistic.* to 'admin'@'localhost';
 ```
 
 ```
-python manager.py makemigrations
-python manager.py migrate
+python3 manager.py makemigrations
+python3 manager.py migrate
 ```
