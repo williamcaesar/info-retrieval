@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from .models import Documents
 from .models import Global
-from .ri_vetorial.colecao import Colecao
+from .ri_probabilistic.colecao import Colecao
 
 import json
 

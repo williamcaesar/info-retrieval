@@ -4,11 +4,11 @@ from .models import Documents
 from .models import Global
 # from .database import DB
 
-from .ri_vetorial.documento import Documento
-from .ri_vetorial.colecao import Colecao, sort_dic
-from .ri_vetorial.consulta import Consulta
-from .ri_vetorial.tokens import archive as archive
-from .ri_vetorial.tokens.files import Read
+from .ri_probabilistic.documento import Documento
+from .ri_probabilistic.colecao import Colecao, sort_dic
+from .ri_probabilistic.consulta import Consulta
+from .ri_probabilistic.tokens import archive as archive
+from .ri_probabilistic.tokens.files import Read
 
 import json
 

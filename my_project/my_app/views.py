@@ -6,16 +6,13 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Documents
 from .models import Global
 
-import time
 import os
-import sys
 import json
-import math
-# import numpy as np
+import my_app.ri_probabilistic.tokens.archive as archive
 
-import my_app.ri_vetorial.tokens.archive as archive
-# from .mysql import update_global_all, update_global_idf, update_global_insert, update_global_remove, insert_document, remove_document
 from .database import DB
+
+
 # Create your views here.
 
 
@@ -48,7 +45,7 @@ def upload_drive(request):
                 dest.write(c)
 
         # Analisa o arquivo em busca de textos
-        text = archive.get_text(filename, target_folder+'/')
+        text = archive.get_text(filename, target_folder + '/')
         # Salva o novo documento no db
         DB().insert_document(filename, text)
 
@@ -93,12 +90,13 @@ def getglobal(request):
     print('Get Global', name)
     values = Global.objects.values().distinct()[0]
     qtDocument = len(Documents.objects.values('name').distinct())
-    list_documents = Documents.objects.values('name', 'qtStopwords', 'qtStopwordsTotal', 'qtAdverbios', 'qtAdverbiosTotal', 'qtToken', 'qtTokenTotal').distinct()
+    list_documents = Documents.objects.values('name', 'qtStopwords', 'qtStopwordsTotal', 'qtAdverbios',
+                                              'qtAdverbiosTotal', 'qtToken', 'qtTokenTotal').distinct()
     qtWordsTotal = (values['qtTokens'] + values['qtStopwords'] + values['qtAdverbios'])
 
     documents_dict = []
     for item in list_documents:
-        qtTokensTotal = item['qtTokenTotal']+item['qtStopwordsTotal']+item['qtAdverbiosTotal']
+        qtTokensTotal = item['qtTokenTotal'] + item['qtStopwordsTotal'] + item['qtAdverbiosTotal']
         if item['qtTokenTotal'] != 0:
             documents_dict.append(
                 {'name': item['name'],
@@ -107,9 +105,9 @@ def getglobal(request):
                  'qtAdverbios': item['qtAdverbiosTotal'],
                  'qtTokens': item['qtTokenTotal'],
                  'qtWordsP': 100,
-                 'qtStopwordsP': iround((item['qtStopwordsTotal']/qtTokensTotal)*100),
-                 'qtAdverbiosP': iround((item['qtAdverbiosTotal']/qtTokensTotal)*100),
-                 'qtTokensP': iround((item['qtTokenTotal']/qtTokensTotal)*100),
+                 'qtStopwordsP': iround((item['qtStopwordsTotal'] / qtTokensTotal) * 100),
+                 'qtAdverbiosP': iround((item['qtAdverbiosTotal'] / qtTokensTotal) * 100),
+                 'qtTokensP': iround((item['qtTokenTotal'] / qtTokensTotal) * 100),
                  'qtDocument': qtDocument,
                  'documents': list_documents})
         else:
@@ -134,9 +132,9 @@ def getglobal(request):
              'qtAdverbios': values['qtAdverbios'],
              'qtTokens': values['qtTokens'],
              'qtWordsP': 100,
-             'qtStopwordsP': iround((values['qtStopwords']/qtWordsTotal)*100),
-             'qtAdverbiosP': iround((values['qtAdverbios']/qtWordsTotal)*100),
-             'qtTokensP': iround((values['qtTokens']/qtWordsTotal)*100),
+             'qtStopwordsP': iround((values['qtStopwords'] / qtWordsTotal) * 100),
+             'qtAdverbiosP': iround((values['qtAdverbios'] / qtWordsTotal) * 100),
+             'qtTokensP': iround((values['qtTokens'] / qtWordsTotal) * 100),
              'qtDocument': qtDocument,
              'documents': documents_dict})
     else:
@@ -183,7 +181,7 @@ def search(request):
         query = request.POST['text']
         print('Query: ', query)
         docs = DB().search(query)
-        for doc in docs:
+        for doc in dimport, timeocs:
             print('Name: ', doc['name'])
     except MultiValueDictKeyError:
         print('Error search() in views.py line 187')
@@ -213,7 +211,7 @@ def teste(request):
 
 
 def roundd(val, digits):
-    return round(val+10**(-len(str(val))-1), digits)
+    return round(val + 10 ** (-len(str(val)) - 1), digits)
 
 
 def iround(x):

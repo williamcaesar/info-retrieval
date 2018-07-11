@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from operator import itemgetter
+
 try:
     from .termo import TermoColecao, Termo
     from .frequency import inverse_frequency as idf_class
@@ -9,7 +10,8 @@ except ImportError:
     from termo import TermoColecao, Termo
     from frequency import inverse_frequency as idf_class
     from documento import Documento
-import math
+
+from .probabilistic import get_top_l_sentences, get_top_k_words
 
 
 class Colecao(object):
@@ -30,9 +32,9 @@ class Colecao(object):
                           'tfidf': 'TFIDF'}  # TFIDF
 
     def __str__(self):
-        return 'qtDocumentos: '+str(self.qtDocumentos)+', qtWord: '+\
-            str(self.qtToken)+', qtStopword: '+str(self.qtStopword)+\
-            ', qtAdverbio: '+str(self.qtAdverbio)
+        return 'qtDocumentos: ' + str(self.qtDocumentos) + ', qtWord: ' + \
+               str(self.qtToken) + ', qtStopword: ' + str(self.qtStopword) + \
+               ', qtAdverbio: ' + str(self.qtAdverbio)
 
     def addDocumento(self, nome, text):
         posicao = self.pesquisarDocumento(nome)
@@ -81,7 +83,7 @@ class Colecao(object):
     def calcular_similaridade(self, consulta):
         idf = self.idf
         docs = self.listDocuments
-        # words = self.listTermosColecao
+
         result = {}
         for doc in docs:
             sum_q = sum_d = similaridade = 0.0
@@ -89,13 +91,13 @@ class Colecao(object):
                 idff = 0.0
                 if termo in idf:
                     idff = idf[termo]
-                sum_d += (doc.tf[termo] * idff)**2
+                sum_d += (doc.tf[termo] * idff) ** 2
 
             for termo in consulta.tokens:
                 idff = 0.0
                 if termo in idf:
                     idff = idf[termo]
-                sum_q += (consulta.tokens[termo] * idff)**2
+                sum_q += (consulta.tokens[termo] * idff) ** 2
 
             for word in consulta.tokens:
                 doc_weight = 0.0
@@ -105,8 +107,8 @@ class Colecao(object):
                 if word in idf:
                     idff = idf[word]
                 similaridade += consulta.tokens[word] * (idff * doc_weight)
-            sum_q =  sum_q**(0.5)
-            sum_d =  sum_d**(0.5)
+            sum_q = sum_q ** (0.5)
+            sum_d = sum_d ** (0.5)
             if sum_d == 0.0 or sum_q == 0.0:
                 similaridade = 0.0
             else:
@@ -114,6 +116,16 @@ class Colecao(object):
             if similaridade > 0.0:
                 result[doc.nome] = similaridade
         print('... colecao()calcular_similaridade()  result: ', result)
+        return sort_dic(result, 1, True)
+
+    def calcular_similaridade_x(self, consulta):
+        # put your stuff
+        docs = self.listDocuments
+        words = self.listTermosColecao
+        print('setup terms and docs [OK]')
+        k_words = get_top_k_words(words, 300)
+        result = get_top_l_sentences(docs, consulta, k_words, 300)
+        print('get top sentences [OK]')
         return sort_dic(result, 1, True)
 
 

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from .models import Documents
 from .models import Global
-from .ri_vetorial.tokens import archive as archive
+from .ri_probabilistic.tokens import archive as archive
 from .colecao_to_bd import Connection
 import json
 
