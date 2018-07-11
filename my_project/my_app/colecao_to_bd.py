@@ -87,7 +87,7 @@ class Connection(object):
         # qtDocumentBd = Global.objects.values('qtDocument').distinct()[0]['qtDocument']
 
         if qtDocument == 0:
-            print('Atualizando BD, quantidade de documentos não corresponde...')
+            print('Atualizando BD, quantidade de documentos nao corresponde...')
             # DB().update_global_all()
 
         return qtDocument
