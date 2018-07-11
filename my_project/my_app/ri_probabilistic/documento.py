@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from operator import itemgetter
+
 try:
     from .frequency import term_frequency as tf
     from .frequency import inverse_frequency as idf_class
@@ -110,7 +111,7 @@ class Documento(object):
         max_f = 0
         new_tokens = {}
 
-        if (not(type(tokens) != dict or len(tokens) == 0)):
+        if (not (type(tokens) != dict or len(tokens) == 0)):
             stopwords = Stop().stopwords
             adverbios = Stop().adverbios
 
@@ -134,6 +135,12 @@ class Documento(object):
                 'qtAdverbio': qtAdverbio, 'qtAdverbioTotal': qtAdverbioTotal,
                 'qtWord': qtWord, 'qtWordTotal': qtWordTotal, 'max': max_f}
 
+    def __str__(self):
+        return self.text
+
 
 def sort_dic(dic, indice=0):
     return sorted(dic.items(), key=itemgetter(indice))
+
+
+

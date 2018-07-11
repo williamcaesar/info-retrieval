@@ -25,7 +25,7 @@ def home(request):
 def upload_drive(request):
     # Get file
     upload_file = request.FILES['file']
-    ret = []
+    print('UPLOAD OK')
     if upload_file:
         # Verifica se a pasta alvo já existe, se não, cria ela
         target_folder = settings.PULL_DRIVER_UPLOAD_PATH
@@ -35,7 +35,7 @@ def upload_drive(request):
         # Verifica se o arquivo já existe no bd
         filename = request.POST['filename']
         documents = Documents.objects.values('name').filter(name=filename)
-        if (len(documents) != 0):
+        if len(documents) != 0:
             return JsonResponse({"name": filename, "status": 'false'})
 
         # Save file in folder 'media'
@@ -59,6 +59,7 @@ def upload_drive(request):
 def getdocument(request):
     name = request.POST['name']
     document = Documents.objects.values('tokens', 'tf', 'tfLog', 'tfDouble').filter(name=name)
+    # document2 =
     if len(document) == 0:
         return render(request, 'my_app/show_document.html', {'words': {}})
     else:
@@ -142,7 +143,7 @@ def getglobal(request):
                      'qtTokens': 0, 'qtWordsP': 0, 'qtStopwordsP': 0,
                      'qtAdverbiosP': 0, 'qtTokensP': 0, 'qtDocument': 0})
 
-    # print('info', info)
+    print('info', info)
     print(render(request, 'my_app/show_global.html', {'info': info}))
     return render(request, 'my_app/show_global.html', {'info': info})
 
@@ -181,7 +182,7 @@ def search(request):
         query = request.POST['text']
         print('Query: ', query)
         docs = DB().search(query)
-        for doc in dimport, timeocs:
+        for doc in docs:
             print('Name: ', doc['name'])
     except MultiValueDictKeyError:
         print('Error search() in views.py line 187')

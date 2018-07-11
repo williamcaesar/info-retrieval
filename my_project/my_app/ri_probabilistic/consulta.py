@@ -76,7 +76,7 @@ class Consulta(object):
         max_f = 0
         new_tokens = {}
 
-        if (not(type(tokens) != dict or len(tokens) == 0)):
+        if (not (type(tokens) != dict or len(tokens) == 0)):
             stopwords = Stop().stopwords
             adverbios = Stop().adverbios
 
@@ -99,3 +99,6 @@ class Consulta(object):
                 'qtStopword': qtStopword, 'qtStopwordTotal': qtStopwordTotal,
                 'qtAdverbio': qtAdverbio, 'qtAdverbioTotal': qtAdverbioTotal,
                 'qtWord': qtWord, 'qtWordTotal': qtWordTotal, 'max': max_f}
+
+    def __str__(self):
+        return self.text

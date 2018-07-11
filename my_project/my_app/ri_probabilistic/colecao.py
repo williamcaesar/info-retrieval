@@ -80,7 +80,7 @@ class Colecao(object):
         except AttributeError:
             print('Error, a classe %s não existe' % (nome))
 
-    def calcular_similaridade(self, consulta):
+    def calcular_similaridade_x(self, consulta):
         idf = self.idf
         docs = self.listDocuments
 
@@ -118,15 +118,16 @@ class Colecao(object):
         print('... colecao()calcular_similaridade()  result: ', result)
         return sort_dic(result, 1, True)
 
-    def calcular_similaridade_x(self, consulta):
+    def calcular_similaridade(self, consulta):
         # put your stuff
         docs = self.listDocuments
         words = self.listTermosColecao
         print('setup terms and docs [OK]')
         k_words = get_top_k_words(words, 300)
-        result = get_top_l_sentences(docs, consulta, k_words, 300)
+        result = get_top_l_sentences(docs, consulta.text, k_words, 300)
+        print('*' * 70, '\n', result, '\n', '*' * 70)
         print('get top sentences [OK]')
-        return sort_dic(result, 1, True)
+        return result
 
 
 def sort_dic(dic, indice=0, reverse=False):

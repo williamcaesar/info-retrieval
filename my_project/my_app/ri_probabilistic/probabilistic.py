@@ -4,7 +4,6 @@
 
 """Rank sentences based on cosine similarity and a query."""
 
-
 from argparse import ArgumentParser
 from collections import Counter
 import numpy as np
@@ -22,7 +21,6 @@ def get_top_k_words(sentences, k):
     for sentence in sentences:
         words.extend(sentence.split())
     return [word for word, _ in Counter(words).most_common(k)]
-
 
 
 def encode(sentence, vocabulary):
@@ -45,7 +43,8 @@ def get_top_l_sentences(sentences, query, vocabulary, l):
     for sentence in sentences:
         encoded_sentence = encode(sentence, vocabulary)
         sim = cosine_sim(encoded_sentence, encoded_query)
-        similarities.append((sim, sentence))
+        if sim > 0.0:
+            similarities.append((sim, sentence))
 
     # sort by similarities, descending, and keep the top-l ones
     return sorted(similarities, key=lambda x: x[0], reverse=True)[:l]
@@ -84,11 +83,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-

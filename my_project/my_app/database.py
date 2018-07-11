@@ -163,6 +163,7 @@ class DB(object):
         consulta = Connection().startSearch(query)
 
         docs = colecao.calcular_similaridade(consulta)
+        print(docs)
         # qtd[0] = qtd[0] if qtd[0] >= 0 else 0
         # qtd[1] = qtd[1] if qtd[1] < len(docs) else len(docs)+1
         # docs = docs[qtd[0]:qtd[1]]
