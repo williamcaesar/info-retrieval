@@ -41,10 +41,10 @@ def get_top_l_sentences(sentences, query, vocabulary, l):
     encoded_query = encode(query, vocabulary)
     similarities = []
     for sentence in sentences:
-        encoded_sentence = encode(sentence, vocabulary)
+        encoded_sentence = encode(sentence.text, vocabulary)
         sim = cosine_sim(encoded_sentence, encoded_query)
         if sim > 0.0:
-            similarities.append((sim, sentence))
+            similarities.append((sentence.nome, sim))
 
     # sort by similarities, descending, and keep the top-l ones
     return sorted(similarities, key=lambda x: x[0], reverse=True)[:l]
