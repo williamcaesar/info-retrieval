@@ -10,7 +10,7 @@ mysqlclient = "*"
 pytesseract = "*"
 ply = "*"
 python-docx = "*"
-Django = "*"
+django = ">=2.0.8"
 numpy = "*"
 
 [dev-packages]
