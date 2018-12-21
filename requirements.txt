@@ -3,6 +3,6 @@ pdftotext
 mysqlclient
 pytesseract
 ply
-django >= 2.8
+django >=2.0.8
 python-docx
 numpy
